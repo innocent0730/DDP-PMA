@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+ <html>
+ 	<head>
+ 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 		<title>ABC University Thesis Selection System</title>
+ 		<link rel="stylesheet" type="text/css" href="/DDP-PMA/css/login.css"/>
+ 	</head>
+ 	<script type='text/javascript'>
+ 			function login(){
+ 				 if(document.loginform.id.value == ""){
+ 					alert("Please enter your account number");
+ 					document.loginform.id.focus();
+ 					return;
+ 				 }
+ 				if(document.loginform.password.value == ""){
+ 					alert("Please enter your password");
+ 					document.loginform.password.focus();
+ 					return;
+ 			     }
+ 				document.loginform.submit();
+ 			}
+ 	</script>
+ 	<body>
+ 		<div class="header">
+ 			<h1>ABC University Thesis Selection System</h1>
+ 		</div>
+ 		<div class="wrapper linear">
+ 			
+ 			<div class="loginleft">
+ 				<div style="float: left;">
+ 					<img src="/DDP-PMA/images/loginpic.jpg"/>					
+ 				</div>
+ 				<div class="notification" style="float: right;">
+ 					<div class="notice">
+ 					<ul>
+ 						<li style="float: left;"><img src="/DDP-PMA/images/notice.png"/></li>
+ 						<li class="noticeli">
+ 							<marquee scrollamount=3 font style="COLOR=FF0000; FILTER: shadow(color=FFFF33 ); font-size: 9pt; WIDTH: 100%">
+ 								<s:property value="#session.scrolling"/>
+ 							</marquee>
+ 						</li>						
+ 					</ul>						
+ 					</div>
+ 					<div class="noticeitem">
+ 						<div style="height: 22px; border-bottom: 1px solid;padding:5px 5px;">
+ 							<span style="float: left;">
+ 								<h2>Notice</h2></span>	
+ 							<span style="float: right;"><a href="NoticeService!more.action">more</a></span>
+ 						</div>
+ 						<div class="noticeitem_list">
+ 							<ul>	
+ 								<s:iterator value="#request.indexnotices" id="notices">
+ 									<li><a href="DetailNotice.action"> id=<s:property value=
+ 										"#notices.id" /> <s:property value="#notices.title" /></a></li>
+ 								</s:iterator>
+ 							</ul>
+ 						</div>
+ 					</div>
+ 				</div>
+ 			</div>
+ 			<div class="loginright">
+ 				<h2>Login</h2>
+ 				<form name="loginform" action="Login">
+ 					<div id="" class="logininput">
+ 						<ul>
+ 							<li style="float: left;"><img src="/DDP-PMA/images/user.png"/></li>
+ 							<li style="float: right;"><input type="text" name="id" id="id" placeholder=" Please enter your account number "/></li>
+ 						</ul>
+ 					</div>
+ 					<div id="" class="logininput">
+ 						<ul>
+ 							<li style="float: left;"><img src="/DDP-PMA/images/password.png"/></li>
+ 							<li style="float: right;"><input type="password" name="password" id="password" placeholder=" Please enter your password "/></li>
+ 						</ul>
+ 					</div>
+ 					<div id="" class="loginbut">
+ 						<input class="myButton" type="submit" value="Submit" onClick="login(); return false;" style=" margin-left: 20px;float: left;"/>
+ 					</div>
+ 					<div class="msg">
+ 						<p><s:property value="message" /></p>
+ 					</div>
+ 				</form>
+ 			</div>
+ 		</div>
+ 		<div class="footer">
+ 			<ul>
+ 				<li><a href="#">About us</a></li>
+ 				<li>|</li>
+ 				<li>ABC University Thesis Selection System</li>
+ 				<li>Copyright</li>
+ 				<li>&copy; 2022.</li>
+ 			</ul> 
+ 		</div>
+ 	</body>
+ </html>
