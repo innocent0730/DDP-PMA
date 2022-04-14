@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Student</title>
+		<link rel="stylesheet" type="text/css" href="DDP-PMA/css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="DDP-PMA/css/style.css"/>
+	</head>
+	<body>
+		<div class="header">
+			<div class="logo">
+				<h4>ABC University Thesis Selection System</h4>
+			</div>
+			<div class="navsmall">
+				<ul>
+					<li><a href="StudentService!studentIndex.action" >Home Page</a></li>
+					<li><a href="TopicChoice" class="active">Thesis Selection System</a></li>
+				</ul>
+			</div>
+			<div class="info">
+				<ul>
+					<li><a href="StudentService!logout.action">Cancellation</a></li>
+					<li><a href="studentInfo">Student Name</a></li>
+					
+				</ul>
+			</div>
+		</div>
+		<div class="wrapper linear">
+		
+			<div class="container">
+				<div class="nav">
+					<details>
+                		<summary class="myButton">Personal Information</summary>
+            			<ul>
+            		</details>
+            		<details>
+                		<summary class="myButton">Topic management</summary>
+            			<ul>
+            				<li><a href="TopicService!checkStuTopic.action">My selection</a></li>
+                			<li><a href="StuAddTopicInit">Self-selected</a></li>
+            			</ul>
+            		</details>
+            		<details>
+            			<summary class="myButton"><a href="NoticeIndex">Notify</a></summary>
+            		</details>
+            		<details>
+            			<summary class="myButton"><a href="StudentService!studentIndex.action">Back to home page</a></summary>
+            		</details>
+				</div>
+				<div class="right">
+					<div class="head">
+						<div class="notice">
+							<ul>
+								<li style="float: left;"><img src="images/notice.png"/></li>
+								<li class="noticeli">
+									<marquee scrollamount=3 font style="COLOR=FF0000; FILTER: shadow(color=FFFF33 ); font-size: 9pt; WIDTH: 100%">
+										<s:property value="#session.scrolling"/> 
+									</marquee>
+								</li>						
+							</ul>						
+						</div>
+						<div class="search">
+							<div class="searchhead">
+								<h2>Thesis Selection System</h2>
+							</div>
+							<div class="searchtitle">
+								<form action="SearchTopic">
+								<ul>
+									<li><label>ID:</label></li>
+									<li><input type="text" name="id" /></li>
+									<li><label>Specialty:</label></li>
+									<li>
+										<select name="fieldId">
+							   	                <option value="" selected="selected">Please select</option>
+											<s:iterator value="#request.fields" id="field">
+													<option value="<s:property value=‘#field.id’ />"><s:property value="#field.name" /></option>
+											</s:iterator>
+										</select>
+									</li>
+									</li>
+									<li><label>status:</label></li>
+									<li>
+										<select name="state">
+											<option value="" selected="selected">Please select</option>
+											<option value="0">Available</option>
+											<option value="1">Not available</option>
+										</select>
+									</li>
+									<input type="hidden" name="matchType"/>
+									<input type="hidden" name="check"/>
+									<li><label>Keywords:</label></li>
+									<li><input type="text" name="name" /></li>
+									<li><button class="searchBut" type="submit">Search</button></li>
+								</ul>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="table">
+						<div class="article" style="text-align:center;vertical-align:middle">
+							<ul>
+								<li style="color: #FFFFFF;"><s:property value="message"/></li>
+							</ul>
+							<table class="tablestyle">
+								<tr style="color: #FFFFFF; width: 100%; background: #4169E1;">
+									<td width="5%">ID</td>
+									<td width="28%">Title</td>
+									<td width="10%">Specialty</td>
+									<td width="7%">Apply number</td>
+									<td width="10%">Audit</td>
+									<td width="8%">Optional</td>
+									<td width="8%">Limited number</td>
+									<td width="12%">Operation</td>		
+															
+								</tr>
+								
+								<s:iterator value="#request.topics" id="topic">
+									<tr>
+										<td><s:property value="#topic.id" /></td>
+										<td><a href="topicdetail.action" id= <s:property value=‘#topic.id’ /> <s:property value="#topic.title" /></a></td>
+										<td>
+											<s:iterator value="#request.fields" id="field">
+												<s:if test="#field.id==#topic.fieldId">
+													<s:property value="#field.name" />
+												</s:if>
+											</s:iterator>
+										</td>
+										<td><s:property value="#topic.applyNum" /></td>
+										<td>
+											<s:if test="#topic.isCheck==0">Not check</s:if>
+											<s:if test="#topic.isCheck==1">Audit not approved</s:if>
+											<s:if test="#topic.isCheck==2">Audit approved</s:if>
+										</td>
+										<td>
+											<s:if test="#topic.isAvailable==0">Available</s:if>
+											<s:if test="#topic.isAvailable==1">Not available</s:if>
+										</td>
+										<td><s:property value="#topic.limitedNum" /></td>
+										<td>
+											<s:if test="#topic.isAvailable==0">
+												<a href="StuChoiceTopic.action" id=<s:property value=‘#topic.id’ />">select</a>
+											</s:if>
+										</td>
+									</tr>
+								</s:iterator>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<ul>
+				<li><a href="#">About us</a></li>
+				<li>ABC University Thesis Selection System</li>
+				<li>Copyright</li>
+				<li>&copy; 2022.</li>
+			</ul>
+		</div>
+	</body>
+</html>

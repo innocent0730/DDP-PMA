@@ -1,0 +1,20 @@
+<s:iterator value="#request.choiceMaps" id="choiceMap">
+									<tr>
+										<td><s:property value="#choiceMap.topicId" /></td>
+										<td><a href="topicdetail.action?id=<s:property value="#choiceMap.topicId" />"><s:property value="#choiceMap.topicTitle" /></a></td>						
+										<td><s:property value="#choiceMap.studentId" /></td>
+										<td><s:property value="#choiceMap.studentName" /></td>	
+										<td><s:property value="#choiceMap.createTime" /></td>	
+										<td>
+											<s:if test="#choiceMap.state==0">Not identified</s:if>
+											<s:if test="#choiceMap.state==1">Accepted</s:if>
+											<s:if test="#choiceMap.state==2">Rejected</s:if>
+										</td>
+										<td>
+											<s:if test="#request.topic.state==0">
+												<a href="SelectStudent!accept.action?id=<s:property value="#choiceMap.id" />">Accept</a>&nbsp;&nbsp;&nbsp;<a href="<s:property value="SelectStudent!refuse.action?id=#choiceMap.id" />">Reject</a>
+											</s:if>
+											<s:else>Confirmed</s:else>
+										</td>
+									</tr>
+								</s:iterator>
